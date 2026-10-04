@@ -1,3 +1,5 @@
+import { container } from '../ui'
+
 const footerLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Subjects', href: '#subjects' },
@@ -10,22 +12,24 @@ const year = new Date().getFullYear()
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="container footer-inner">
-        <div className="footer-brand">
-          <h2>StudySpace</h2>
-          <p>A simple study space for organizing subjects, tasks, and focus time.</p>
+    <footer className="border-t border-line bg-white pt-12">
+      <div className={`${container} flex flex-wrap justify-between gap-8 pb-8`}>
+        <div>
+          <h2 className="mb-1.5 text-2xl">StudySpace</h2>
+          <p className="max-w-sm text-soft">A simple study space for organizing subjects, tasks, and focus time.</p>
         </div>
 
-        <nav className="footer-links" aria-label="Footer">
+        <nav className="flex flex-wrap gap-6" aria-label="Footer">
           {footerLinks.map((link) => (
-            <a key={link.label} href={link.href}>
+            <a key={link.label} href={link.href} className="font-medium text-soft transition-colors hover:text-blue">
               {link.label}
             </a>
           ))}
         </nav>
       </div>
-      <p className="copyright">&copy; {year} StudySpace. Made for a school activity.</p>
+      <p className="border-t border-line p-5 text-center text-sm text-soft">
+        &copy; {year} StudySpace. Made for a school activity.
+      </p>
     </footer>
   )
 }

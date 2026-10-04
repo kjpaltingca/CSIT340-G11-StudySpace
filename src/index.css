@@ -1,0 +1,58 @@
+/* Tailwind entry file.
+   1. Load Tailwind.
+   2. Teach it our project's colors, fonts and shadows (@theme).
+   3. A few base styles that utility classes can't cover. */
+@import 'tailwindcss';
+
+/* Everything in @theme becomes a utility class automatically:
+   --color-ink      ->  bg-ink, text-ink, border-ink ...
+   --font-heading   ->  font-heading
+   --shadow-card    ->  shadow-card                            */
+@theme {
+  --color-ink: #12203a;
+  --color-soft: #4a5876;
+  --color-paper: #f4f7fb;
+  --color-blue: #2f5bea;
+  --color-blue-dark: #2447c4;
+  --color-highlight: #ffd84d;
+  --color-line: #dce3ef;
+  --color-done-bg: #e3f5ea;
+  --color-done-text: #176b3a;
+  --color-pending-bg: #fff3cc;
+  --color-pending-text: #7a5a00;
+
+  --font-heading: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+
+  --shadow-card: 0 6px 20px rgb(18 32 58 / 0.08);
+  --shadow-card-hover: 0 12px 28px rgb(18 32 58 / 0.14);
+  --shadow-hard: 8px 8px 0 #12203a;
+}
+
+@layer base {
+  /* Tailwind removes default heading styles, so we set our font once here */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  /* Keyboard users can see where they are */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
+  }
+}
+
+/* A custom utility for the graph-paper hero background: class "bg-graph-paper" */
+@utility bg-graph-paper {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
