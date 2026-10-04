@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom'
 import { container } from '../ui'
 
 const footerLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Subjects', href: '#subjects' },
-  { label: 'Tasks', href: '#tasks' },
-  { label: 'About', href: '#about' },
+  { label: 'Home', to: '/' },
+  { label: 'Subjects', to: '/#subjects' },
+  { label: 'Tasks', to: '/#tasks' },
+  { label: 'Timer', to: '/timer' },
+  { label: 'About', to: '/#about' },
 ]
 
 // Calculated once, outside the component, so it always shows the current year
@@ -21,9 +23,9 @@ function Footer() {
 
         <nav className="flex flex-wrap gap-6" aria-label="Footer">
           {footerLinks.map((link) => (
-            <a key={link.label} href={link.href} className="font-medium text-soft transition-colors hover:text-blue">
+            <Link key={link.label} to={link.to} className="font-medium text-soft transition-colors hover:text-blue">
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Subjects from './components/Subjects'
-import Tasks from './components/Tasks'
-import Statistics from './components/Statistics'
-import About from './components/About'
 import Footer from './components/Footer'
+
+import Home from './pages/Home'
+import Timer from './pages/Timer'
+import NotFound from './pages/NotFound'
 
 import { subjectsData, initialTasks } from './data'
 
@@ -21,6 +21,22 @@ function loadTasks() {
   } catch {
     return initialTasks
   }
+}
+
+// When the address changes, scroll to the right place:
+// "/#tasks" scrolls to the Tasks section, any other page starts at the top.
+function ScrollToHash() {
+  const { pathname, hash } = useLocation()
+
+  useEffect(() => {
+    if (hash) {
+      document.querySelector(hash)?.scrollIntoView()
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname, hash])
+
+  return null
 }
 
 function App() {
@@ -77,19 +93,26 @@ function App() {
   return (
     <>
       <Navbar />
+      <ScrollToHash />
       <main>
-        <Hero />
-        <Subjects subjects={subjectsData} />
-        <Tasks
-          tasks={tasks}
-          subjects={subjectsData}
-          onToggleTask={toggleTask}
-          onAddTask={addTask}
-          onDeleteTask={deleteTask}
-          onResetTasks={resetTasks}
-        />
-        <Statistics subjects={subjectsData} tasks={tasks} />
-        <About />
+        {/* Each Route shows a different page depending on the address */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                subjects={subjectsData}
+                tasks={tasks}
+                onToggleTask={toggleTask}
+                onAddTask={addTask}
+                onDeleteTask={deleteTask}
+                onResetTasks={resetTasks}
+              />
+            }
+          />
+          <Route path="/timer" element={<Timer />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
     </>

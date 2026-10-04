@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { btnOutline, btnPrimary, container } from '../ui'
 
 // Data for the CSS dashboard picture, rendered with .map()
@@ -21,12 +22,12 @@ function Hero() {
             subjects, manage tasks, and stay focused.
           </p>
           <div className="flex flex-wrap gap-3.5">
-            <a href="#tasks" className={btnPrimary}>
+            <Link to="/#tasks" className={btnPrimary}>
               Start Studying
-            </a>
-            <a href="#subjects" className={btnOutline}>
+            </Link>
+            <Link to="/#subjects" className={btnOutline}>
               Explore Subjects
-            </a>
+            </Link>
           </div>
         </div>
 
